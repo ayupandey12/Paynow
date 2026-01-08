@@ -1,7 +1,11 @@
 import { prisma } from "@repo/db";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
+interface cred{
+  name?: string
+  phone :string
+  password :string
+}
 export const authOptions={
   providers: [
     CredentialsProvider({
@@ -12,7 +16,8 @@ export const authOptions={
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials: any) {
-        const { phone, password, name } = credentials;
+        if (!credentials?.phone || !credentials?.password) return null;
+        const { phone, password, name } = credentials as cred
 
         // 1. Check if user exists
         const exist = await prisma.user.findFirst({
@@ -23,7 +28,7 @@ export const authOptions={
           return { id: exist.id, name: exist.name };
         }
 
-        // 2. Create user if not found (Signup on Login logic)
+        //  Create user if not found (Signup on Login logic)
         try {
           const user = await prisma.user.create({
             data: { name, phone, password }
@@ -36,10 +41,24 @@ export const authOptions={
       }
     })
   ],
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
+     callbacks: {
+    async jwt({ token, user }:any) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }:any) {
+      if (session.user) {
+        session.user.id = token.id ;
+      }
+      return session;
+    }
+  }
 };
 
 const handler = NextAuth(authOptions);
 
-// Use this syntax for Next.js App Router
+
 export { handler as GET, handler as POST };
