@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    turbopackFileSystemCacheForDev: false,
-  },
+  transpilePackages: ["@repo/ui"],
 };
-
 export default nextConfig;

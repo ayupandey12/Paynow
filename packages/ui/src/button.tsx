@@ -1,5 +1,4 @@
 "use client";
-// import "../global.css"
 import { ReactNode } from "react";
 
 interface ButtonProps {

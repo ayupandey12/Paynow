@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+     "./styles.css": "./src/styles/globals.css",
     "./*": "./src/*.tsx"
   },
   "scripts": {
@@ -13,10 +14,13 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "^9.39.1",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^4.1.18",
     "typescript": "5.9.2"
   },
   "dependencies": {

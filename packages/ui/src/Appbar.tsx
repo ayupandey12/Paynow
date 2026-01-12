@@ -1,5 +1,4 @@
 "use client"
-// import "../global.css"
   import {Button} from "@repo/ui/button"
 interface Appbartype{
   user?:{
@@ -10,7 +9,7 @@ interface Appbartype{
 }
 
   export const Appbar=({user,onSignout,onSignin}:Appbartype)=>{
-   return  <div className="flex justify-between border-b px-4">
+   return  <div className="flex justify-between border-b px-4 ">
         <div className="text-lg flex flex-col justify-center">
             PayTM
         </div>
