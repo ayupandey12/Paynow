@@ -1,13 +1,9 @@
-"use client"
-import { useSession } from "next-auth/react";
-import { signIn,signOut}from "next-auth/react";
-export default function Home() {
- const user=useSession()
-  return (
-    <div >
-       <button onClick={() => signIn()}>Sign In</button>
-      <button onClick={() => signOut()}>Sign Out</button>
-      {JSON.stringify(user.data?.user?.name)??"no data"}
-    </div>
-  );
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+ const user=await getServerSession(authOptions)
+  if(user) redirect('/dashboard');
+  else redirect('/api/auth/signin')
 }
