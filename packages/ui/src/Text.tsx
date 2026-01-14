@@ -1,3 +1,4 @@
+"use client"
 export const Text=({label,placeholder,onChange,id}:{
     label:string,
     placeholder:string,
