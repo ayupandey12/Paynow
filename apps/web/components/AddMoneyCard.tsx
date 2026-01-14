@@ -5,9 +5,6 @@ import { Button } from "@repo/ui/button"
 import {Select} from "@repo/ui/Select"
 import { useEffect, useState } from "react"
 const SUPPORTED_BANKS = [{
-    value:"   ",
-    key:""
-},{
     value: "HDFC Bank",
     key: "https://netbanking.hdfcbank.com"
 }, {
