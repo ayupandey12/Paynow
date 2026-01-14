@@ -24,12 +24,12 @@ export const AddMoneyCard=()=>{
    
         return <Card title="Add Money">
                 <div className="w-full">
-                    <form onSubmit={() => {window.location.href = RedirectUrl || "";}} action="">
+                    <form action={RedirectUrl||""}>
                            <Text id="Amount" label="Amount" placeholder="Amount" onChange={SetAmount}/>         
                     <div className="py-4 text-left">Bank</div>
                     <Select onSelect={SetRedirectUrl} options={SUPPORTED_BANKS}/>
                       <div className="flex justify-center pt-4">
-                        <Button type={"submit"}>Add Money</Button>
+                        <Button type="submit">Add Money</Button>
                       </div>
                     </form>
                 </div>
