@@ -2,9 +2,7 @@ import { getServerSession } from "next-auth";
 import { AddMoneyCard } from "../../../components/AddMoneyCard";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { prisma } from "@repo/db";
- 
-export default async function transfer(){
-  async function getbalance() {
+ async function getbalance() {
     const session=await getServerSession(authOptions);
     const balance=await prisma.balance.findFirst({
       where:{
@@ -30,7 +28,8 @@ export default async function transfer(){
         provider: t.provider
     }))
   }
- await getbalance();
- await getonramptransactions()
+export default async function transfer(){
+ const balance=await getbalance();
+ const transactons=await getonramptransactions()
   return <AddMoneyCard/>
 }
