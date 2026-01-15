@@ -1,14 +1,10 @@
 import { Card } from "@repo/ui/card"
-export enum StatusProps {
-    Success = "Success",
-    Processing = "Processing",
-    Failed = "Failed"
-}
+import { OnRampStatus } from "@repo/db";
 
 interface Transaction {
     time: Date;
     amount: number;
-    status: StatusProps;
+    status: OnRampStatus;
     provider: string;
 }
 export const OnRampTransactions = ({transactions}:{transactions:Transaction[]}) => {
@@ -35,7 +31,7 @@ export const OnRampTransactions = ({transactions}:{transactions:Transaction[]}) 
                                 + Rs {t.amount / 100}
                             </span>
                             <span className={`text-[10px] uppercase font-bold ${
-                                t.status === StatusProps.Success ? 'text-green-600' : 'text-yellow-600'
+                                t.status === OnRampStatus.Success ? 'text-green-600' : 'text-yellow-600'
                             }`}>
                                 {t.status}
                             </span>
