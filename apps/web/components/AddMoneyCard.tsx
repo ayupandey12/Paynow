@@ -14,10 +14,14 @@ const SUPPORTED_BANKS = [{
 
 export const AddMoneyCard=()=>{
     const [Amount,SetAmount]=useState<number|null>(null)
+    const [provider,Setprovider]=useState<string|null>(null)
     const [RedirectUrl,SetRedirectUrl]=useState<string|null>(null)
+    
    useEffect(() => {
-     console.log(Amount,RedirectUrl)
-   }, [Amount,RedirectUrl])
+    const bank=SUPPORTED_BANKS.filter(t=>t.key===RedirectUrl)
+    Setprovider(bank[0]?.value||null)
+     console.log(Amount,RedirectUrl,provider)
+   }, [RedirectUrl,provider])
    
         return <Card title="Add Money">
                 <div className="w-full">
