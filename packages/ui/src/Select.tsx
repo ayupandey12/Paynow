@@ -5,9 +5,9 @@ import React from "react"
 export const Select=({onSelect,options}:{onSelect:(key:string,value:string)=>void,options:{key:string,value:string}[]})=>{
     const handlechange=(e:React.ChangeEvent<HTMLSelectElement>)=>{
              const selectedvalue=e.target.value;
-             const selectedoption=options.find(t=>t.value===selectedvalue)
+             const selectedoption=options.find(t=>t.key===selectedvalue)
              if(selectedoption)
-             {
+             { 
                 onSelect(selectedoption.key,selectedoption.value)
              }
     }

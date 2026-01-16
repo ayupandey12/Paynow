@@ -18,17 +18,18 @@ export const AddMoneyCard=()=>{
     const [RedirectUrl,SetRedirectUrl]=useState<string|null>(null)
     
    useEffect(() => {
-    const bank=SUPPORTED_BANKS.filter(t=>t.key===RedirectUrl)
-    Setprovider(bank[0]?.value||null)
      console.log(Amount,RedirectUrl,provider)
-   }, [RedirectUrl,provider])
+   }, [Amount,RedirectUrl,provider])
    
         return <Card title="Add Money">
                 <div className="w-full">
                     <form action={RedirectUrl||""}>
                            <Text id="Amount" label="Amount" placeholder="Amount" onChange={SetAmount}/>         
                     <div className="py-4 text-left">Bank</div>
-                    <Select onSelect={SetRedirectUrl} options={SUPPORTED_BANKS}/>
+                    <Select onSelect={ (key,value)=>{
+                      SetRedirectUrl(key)
+                      Setprovider(value)             
+                    }} options={SUPPORTED_BANKS}/>
                       <div className="flex justify-center pt-4">
                         <Button type="submit">Add Money</Button>
                       </div>
