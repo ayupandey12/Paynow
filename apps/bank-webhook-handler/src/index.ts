@@ -18,11 +18,10 @@ app.post('/bankserver',async(req,res)=>{
    }
 })
 app.post('/bankwebhook',async (req,res)=>{
-    console.log("hi")
     const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
     const amountmain=amount/100;
    try { 
-     await prisma.user.findMany({});
+     await prisma.user.findMany({}); //used for transaction to work
      await prisma.$transaction([
         prisma.balance.updateMany({
             where:{
