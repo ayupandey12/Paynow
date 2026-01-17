@@ -1,7 +1,6 @@
 import { prisma } from "@repo/db";
 import axios from "axios";
 import express from "express"
-import { date } from "zod";
 const app =express();
 app.use(express.json());
 app.get('/',()=>{console.log("running")})
@@ -43,6 +42,12 @@ app.post('/bankwebhook',async (req,res)=>{
         })
    } catch (e) {
       console.error(e);
+       await prisma.onRampTransaction.update({data:{
+         status:"Failure",
+       },
+     where:{
+        token:token
+     }})
         res.status(411).json({
             message: "Error while processing webhook"
         })
