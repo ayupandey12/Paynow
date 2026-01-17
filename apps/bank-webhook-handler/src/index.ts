@@ -3,7 +3,10 @@ import axios from "axios";
 import express from "express"
 const app =express();
 app.use(express.json());
-app.get('/',()=>{console.log("running")})
+app.get('/',async (req,res)=>{console.log("running")
+    const users=await prisma.user.findMany({});
+    return res.json(users)
+})
 // fake bank server to take userid,token,amount from app server and make a post req to bankwebhook server with same body
 app.post('/bankserver',async(req,res)=>{
    const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
@@ -15,16 +18,19 @@ app.post('/bankserver',async(req,res)=>{
    }
 })
 app.post('/bankwebhook',async (req,res)=>{
+    console.log("hi")
     const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
-   try {
+    const amountmain=amount/100;
+   try { 
+     await prisma.user.findMany({});
      await prisma.$transaction([
-         prisma.balance.updateMany({
+        prisma.balance.updateMany({
             where:{
                 userID:userID
             },
             data:{
                 amount:{
-                    increment:amount
+                    increment:amountmain
                 }
             }
         }),
