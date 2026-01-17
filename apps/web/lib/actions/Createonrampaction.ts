@@ -18,5 +18,24 @@ export async function CreateOnRampTransaction({provider,amount}:{provider:string
             status:"Processing"
         }
     })
-    return {message:"Done"};
+     try {
+        await axios.post("http://localhost:3010/bankserver", {
+            token: token,
+            userID: session?.user?.id,
+            amount: amount
+        });
+        return { message: "Done" };
+
+    } catch (error) {
+        console.error("Payment Initiation Failed, updating status to Failure:", error);
+        await prisma.onRampTransaction.update({
+            where: { token: token },
+            data: { status: "Failure" }
+        });
+        
+        return { 
+            message: "Error", 
+            error: "Could not communicate with bank, transaction failed instantly." 
+        };
+    }
 }
