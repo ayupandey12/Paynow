@@ -1,12 +1,22 @@
 import { prisma } from "@repo/db";
+import axios from "axios";
 import express from "express"
+import { date } from "zod";
 const app =express();
 app.use(express.json());
+app.get('/',()=>{console.log("running")})
+// fake bank server to take userid,token,amount from app server and make a post req to bankwebhook server with same body
 app.post('/bankserver',async(req,res)=>{
-    
+   const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
+   try {
+    const rest=await axios.post("http://localhost:3010/bankwebhook",{userID,token,amount})
+    return res.json({message:"done"})
+   } catch (error) {
+    return res.json({message:"error on while sending to webhookserver"})
+   }
 })
 app.post('/bankwebhook',async (req,res)=>{
-    const {userID,token,amount}:{userID:string,token:string,amount:string}=req.body;
+    const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
    try {
      await prisma.$transaction([
          prisma.balance.updateMany({
@@ -15,7 +25,7 @@ app.post('/bankwebhook',async (req,res)=>{
             },
             data:{
                 amount:{
-                    increment:Number(amount)
+                    increment:amount
                 }
             }
         }),
