@@ -2,8 +2,10 @@ import { prisma } from "@repo/db";
 import express from "express"
 const app =express();
 app.use(express.json());
-
-app.post('/bankserver',async (req,res)=>{
+app.post('/bankserver',async(req,res)=>{
+    
+})
+app.post('/bankwebhook',async (req,res)=>{
     const {userID,token,amount}:{userID:string,token:string,amount:string}=req.body;
    try {
      await prisma.$transaction([
