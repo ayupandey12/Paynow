@@ -1,6 +1,7 @@
 {
   "name": "@repo/db",
   "version": "0.0.0",
+  "type": "module",
    "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev ",
@@ -17,6 +18,6 @@
     "prisma": "^7.2.0"
   },
   "exports": {
-    ".": "./src/index.ts"
+     ".": "./src/index.ts"
   }
 }

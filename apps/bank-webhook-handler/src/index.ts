@@ -1,4 +1,3 @@
-
 import { prisma } from "@repo/db";
 import express from "express"
 const app =express();
@@ -37,4 +36,6 @@ app.post('/bankserver',async (req,res)=>{
         })
    }
 })
-   app.listen(3010);
+   app.listen(3010,()=>{
+    console.log("server is running")
+   });
