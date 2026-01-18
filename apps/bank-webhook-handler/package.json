@@ -14,9 +14,11 @@
     "@repo/typescript-config": "*",
     "@types/express": "^5.0.6",
     "axios": "^1.13.2",
+    "cors": "^2.8.5",
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/node": "^22.19.3",
     "tsx": "^4.21.0"
   }

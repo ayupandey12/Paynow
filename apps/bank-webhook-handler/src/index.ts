@@ -1,8 +1,11 @@
 import { prisma } from "@repo/db";
 import axios from "axios";
 import express from "express"
+import cors from "cors"
 const app =express();
-app.use()
+app.use(cors({
+    origin:["http://localhost:3010","http://localhost:3000"]
+}))
 app.use(express.json());
 app.get('/',async (req,res)=>{console.log("running")
     const users=await prisma.user.findMany({});
