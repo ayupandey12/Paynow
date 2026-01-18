@@ -29,7 +29,7 @@ export const AddMoneyCard=()=>{
                          await CreateOnRampTransaction({provider:provider||"",amount:Amount||0})
                          window.location.href=RedirectUrl||""
                     }}>
-                           <Text id="Amount" label="Amount" placeholder="Amount" onChange={SetAmount}/>         
+                           <Text id="Amount" label="Amount" placeholder="Amount" onChanges={()=>{}} onChange={SetAmount}/>         
                     <div className="py-4 text-left">Bank</div>
                     <Select onSelect={ (key,value)=>{
                       SetRedirectUrl(key)
