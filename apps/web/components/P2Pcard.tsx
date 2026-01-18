@@ -11,7 +11,7 @@ export const P2Pcard=()=>{
       console.log(amount,phone)
     }, [amount,phone])
     
-    return <div className="h-[90vh] flex items-center justify-center-safe m-auto">
+    return <div className="h-[90vh] flex items-center justify-center-safe ">
          <Card title="Send">
                <form action="">
                  <div className="min-w-72 pt-2">
