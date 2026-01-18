@@ -1,3 +1,5 @@
+import { P2Pcard } from "../../../components/P2Pcard";
+
 export default function P2P() {
-    return <div>p2p</div>
+    return <P2Pcard/>
 }
