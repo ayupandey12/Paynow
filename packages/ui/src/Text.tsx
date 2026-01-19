@@ -1,12 +1,13 @@
 "use client"
-export const Text = ({ label, placeholder, onChange, id, setmessage, type = "number",onChanges }: {
+export const Text = ({ label, placeholder, onChange, id, setmessage, type = "number",onChanges ,min}: {
     label: string,
     placeholder: string,
     onChanges: (value: string | null) => void,
     onChange: (value: number | null) => void,
     id: string,
     setmessage?: string,
-    type?: "number" | "tel"
+    type?: "number" | "tel",
+    min?:number
 }) => {
     return (
         <div className="pt-2">
@@ -18,7 +19,8 @@ export const Text = ({ label, placeholder, onChange, id, setmessage, type = "num
                 id={id}
                 type={type} 
                 placeholder={placeholder}
-                min={type === "number" ? 1 : undefined}
+                step={type === "number" ? "any" : undefined}
+                min={type === "number" ? min??1 : undefined}
                 minLength={type === "tel" ? 10 : undefined}
                 maxLength={type === "tel" ? 10 : undefined}
                 pattern={type === "tel" ? "[0-9]*" : undefined}

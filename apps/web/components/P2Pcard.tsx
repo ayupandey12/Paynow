@@ -22,7 +22,7 @@ export const P2Pcard=()=>{
                     <Text placeholder={"Number"} label="Number" id="phone" type="tel" onChange={()=>{}} onChanges={(value) => {
                         serphone(value)
                     }} />
-                    <Text placeholder={"Amount"} label="Amount" id="amount" onChanges={()=>{}} onChange={(value) => {
+                    <Text placeholder={"Amount"} label="Amount" id="amount" setmessage="Amount should be greater than 0" min={0} onChanges={()=>{}} onChange={(value) => {
                         setamount(value)
                     }} />
                     <div className="pt-4 flex justify-center">
