@@ -27,7 +27,7 @@ export async function P2pTransfer({to,amount}:{to:string,amount:number}) {
             where: { userID: from },
           });
           if (!fromBalance || fromBalance.amount < amount) {
-            throw new Error('Insufficient funds');
+            return {message:"Insufficient funds"}
           }
 
           await tx.balance.updateMany({

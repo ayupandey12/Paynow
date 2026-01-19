@@ -31,7 +31,7 @@ export const authOptions={
         //  Create user if not found (Signup on Login logic)
         try {
           const user = await prisma.user.create({
-            data: { name, phone, password }
+            data: { name, phone, password,Balance:{create:{amount:0,locked:0}} }
           });
           return { id: user.id, name: user.name };
         } catch (err) {
