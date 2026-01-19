@@ -3,6 +3,7 @@ import { Button } from "@repo/ui/button"
 import { Card } from "@repo/ui/card"
 import { Text } from "@repo/ui/Text"
 import { useEffect, useState } from "react"
+import { P2pTransfer } from "../lib/actions/p2ptransfer"
 
 export const P2Pcard=()=>{
     const [amount,setamount]=useState<number|null>()
@@ -13,7 +14,10 @@ export const P2Pcard=()=>{
     
     return <div className="h-[90vh] flex items-center justify-center-safe ">
          <Card title="Send">
-               <form action="">
+               <form action={async()=>{
+                 const res= await P2pTransfer({to:phone||"",amount:amount||0})
+                 console.log(res?.message)
+               }}>
                  <div className="min-w-72 pt-2">
                     <Text placeholder={"Number"} label="Number" id="phone" type="tel" onChange={()=>{}} onChanges={(value) => {
                         serphone(value)
