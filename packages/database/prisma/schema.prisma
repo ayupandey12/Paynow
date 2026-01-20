@@ -20,6 +20,8 @@ model user{
   password String
   Balance Balance[]
   OnRampTransaction OnRampTransaction[]
+  senttransfer p2ptransfer[] @relation(name: "fromuserrelation")
+  recievedtransfer p2ptransfer[] @relation(name:"touserrelation")
 }
 model Balance {
   id String @id @default(uuid())
@@ -42,4 +44,13 @@ enum OnRampStatus {
   Success
   Failure
   Processing
+}
+model p2ptransfer{
+  id String @id @default(uuid())
+  amount Int
+  startdate DateTime
+  fromuserID String
+  fromuser user @relation( name: "fromuserrelation",fields: [fromuserID] ,references: [id])
+  touserID String
+  touser user @relation( name: "touserrelation",fields: [touserID], references: [id])
 }
