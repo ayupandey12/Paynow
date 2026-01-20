@@ -17,6 +17,9 @@ export const P2Pcard=()=>{
     return <div className="h-[90vh] flex items-center justify-center-safe ">
          <Card title="Send">
                <form action={async()=>{
+                if(amount===0) {setmessage("Amount should not be 0") 
+                    return
+                }
                  const res= await P2pTransfer({to:phone||"",amount:amount||0})
                  console.log(res?.message)
                  setmessage(res.message)
