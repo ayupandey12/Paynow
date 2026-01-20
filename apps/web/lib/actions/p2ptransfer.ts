@@ -39,6 +39,14 @@ export async function P2pTransfer({ to, amount }: { to: string, amount: number }
                 where: { userID: toUser.id },
                 data: { amount: { increment: amount } },
             });
+            await tx.p2ptransfer.create({
+                data:{
+                    amount:amount,
+                    startdate:new Date(),
+                    fromuserID:from,
+                    touserID:toUser.id
+                }
+            })
         },
              {
         timeout: 30000, // 30 seconds
