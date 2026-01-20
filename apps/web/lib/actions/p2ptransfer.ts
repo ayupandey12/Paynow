@@ -10,7 +10,7 @@ export async function P2pTransfer({ to, amount }: { to: string, amount: number }
     if (!from) {
         return { message: "Unauthorized" };
     }
-    const toUser = await prisma.user.findUnique({
+    const toUser = await prisma.user.findFirst({
         where: { phone: to }
     });
 
