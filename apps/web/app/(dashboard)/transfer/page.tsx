@@ -18,9 +18,13 @@ import { OnRampTransactions } from "../../../components/OnRampTransactions";
   }
   async function getonramptransactions() {
     const session=await getServerSession(authOptions);
+    if (!session?.user?.id) return [];
     const transactions=await prisma.onRampTransaction.findMany({
       where:{
         userID:session?.user?.id
+      },
+      orderBy:{
+        startTime:"desc"
       }
     })
     return transactions.map(t => ({

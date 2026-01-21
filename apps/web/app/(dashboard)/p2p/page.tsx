@@ -15,6 +15,9 @@ export default async function P2P() {
             select:{
                 startdate:true,
                 amount:true
+            },
+            orderBy:{
+                startdate:"desc"
             }
         })
         return transfers
