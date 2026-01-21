@@ -16,7 +16,7 @@ export const Transfercard=({transfer}:{transfer:transfer[]})=>{
               {transfer.map(t=><div key={Math.random()} className="flex justify-between">
                           <div>
                               <div className="text-sm">
-                                  TRANSFERED INR
+                                  Transfered INR
                               </div>
                               <div className="text-slate-600 text-xs">
                                   {t.startdate.toDateString()}

@@ -20,8 +20,17 @@ export default async function P2P() {
         return transfers
     }
     const Transfer=await gettransfer()
-    return <div>
-        <P2Pcard/>
-        <Transfercard transfer={Transfer}/>
-    </div>
+    return <div className="w-screen">
+            <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
+                P2P Transfer
+            </div>
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 p-4">
+                <div>
+                    <P2Pcard/>
+                </div>
+                <div className=" self-center">
+                       <Transfercard transfer={Transfer}/>
+                </div>
+            </div>
+        </div>
 }
