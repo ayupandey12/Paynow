@@ -16,7 +16,7 @@ import { OnRampTransactions } from "../../../components/OnRampTransactions";
       locked:balance?.locked||0
     }
   }
-  async function getonramptransactions() {
+ export async function getonramptransactions() {
     const session=await getServerSession(authOptions);
     if (!session?.user?.id) return [];
     const transactions=await prisma.onRampTransaction.findMany({

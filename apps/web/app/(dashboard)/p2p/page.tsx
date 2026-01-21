@@ -3,9 +3,10 @@ import { P2Pcard } from "../../../components/P2Pcard";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { prisma } from "@repo/db";
 import { Transfercard } from "../../../components/TransferCard";
- async function gettransfer() {
+export async function gettransfer() {
         const session=await getServerSession(authOptions);
         const user=session.user.id;
+        if(!user) return [];
         const transfers=await prisma.p2ptransfer.findMany({
             where:{
                 fromuserID:user
