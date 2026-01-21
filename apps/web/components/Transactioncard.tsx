@@ -2,14 +2,12 @@
 import { useState, useMemo } from "react";
 import { OnRampStatus } from "@repo/db";
 
-// Types for clarity
 type TransactionType = "ALL" | "ADDED" | "RECIEVED" | "TRANSFER";
 
 
 export const Transactioncard=({ onramp, transfer, recieved }:{onramp:Array<any>,transfer:Array<any>,recieved:Array<any>})=> {
     const [filter, setFilter] = useState<TransactionType>("ALL");
 
-    // 1. Merge and Sort all data once
     const allData = useMemo(() => {
         const merged = [
             ...onramp.map((t: any) => ({
@@ -34,7 +32,6 @@ export const Transactioncard=({ onramp, transfer, recieved }:{onramp:Array<any>,
                 status: "SUCCESS"
             }))
         ];
-        // Sort by newest date first
         return merged.sort((a, b) => b.date.getTime() - a.date.getTime());
     }, [onramp, transfer, recieved]);
 
