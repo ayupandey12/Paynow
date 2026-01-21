@@ -3,6 +3,7 @@ import { gettransfer } from "../p2p/page"
 import { getonramptransactions } from "../transfer/page"
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { prisma } from "@repo/db";
+import { Transactioncard } from "../../../components/Transactioncard";
 export async function getrecieved() {
    const session=await getServerSession(authOptions);
           const user=session.user.id;
@@ -21,17 +22,18 @@ export async function getrecieved() {
           })
           return recieved
 }
-export default function transactions(){
-  interface title{
-    title:"ALL"|"TRANSFER"|"RECIEVED"|"ADDED"
-  }
-  async function getalltransaction({title}:{title:title}) {
-    if(title.title==="ALL")
+export default async function transactions(){
+ 
+  async function getalltransaction() {
+    if(true)
     {
       const onramp=await getonramptransactions()
       const transfer=await gettransfer()
-      const added=await getrecieved()
+      const recieved=await getrecieved()
+    return {onramp,transfer,recieved}
     }
   }
-  return <div>all transactions</div>
+  const {onramp,transfer,recieved}=await getalltransaction();
+  return <Transactioncard onramp={onramp} recieved={recieved} transfer={transfer}/>
+
 }
