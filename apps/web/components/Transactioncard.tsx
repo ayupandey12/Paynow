@@ -48,7 +48,7 @@ export const Transactioncard=({ onramp, transfer, recieved }:{onramp:Array<any>,
     ];
 
     return (
-        <div className="w-full max-w-2xl mx-auto border rounded-xl bg-white shadow-sm overflow-hidden">
+        <div className="w-full h-full mt-15 max-w-2xl mx-auto border rounded-xl bg-white shadow-sm overflow-hidden">
             <div className="flex border-b bg-gray-50/50">
                 {filterButtons.map((btn) => (
                     <button
