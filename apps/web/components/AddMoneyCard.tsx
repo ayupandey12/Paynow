@@ -24,7 +24,8 @@ export const AddMoneyCard=()=>{
    
         return <Card title="Add Money">
                 <div className="w-full">
-                    <form  action={async ()=>{
+                    <form  onSubmit={async (e)=>{
+                      e.preventDefault()
                       console.log("done")
                          await CreateOnRampTransaction({provider:provider||"",amount:Amount||0})
                          window.location.href=RedirectUrl||""

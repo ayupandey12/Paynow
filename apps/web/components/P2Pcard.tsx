@@ -16,7 +16,8 @@ export const P2Pcard=()=>{
     
     return <div className="h-[90vh] flex items-center justify-center-safe ">
          <Card title="Send">
-               <form action={async()=>{
+               <form onSubmit={async(e)=>{
+                e.preventDefault()
                 if(amount===0) {setmessage("Amount should not be 0") 
                     return
                 }
