@@ -3,6 +3,7 @@
 import React from "react"
 
 export const Select=({onSelect,options}:{onSelect:(key:string,value:string)=>void,options:{key:string,value:string}[]})=>{
+    console.log("hii3")
     const handlechange=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         console.log("hi3")
              const selectedvalue=e.target.value;
