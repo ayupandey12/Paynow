@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "../../app/api/auth/[...nextauth]/route"
 import { prisma } from "@repo/db";
 import axios from "axios";
-export async function CreateOnRampTransaction({provider,amount}:{provider:string,amount:number}) {
+ export  const CreateOnRampTransaction= async ({provider,amount}:{provider:string,amount:number})=> {
     const session =await getServerSession(authOptions);
     if(!session?.user||!session.user?.id) return {message: "Unauthenticated request"}
     const token=Math.random().toString();
