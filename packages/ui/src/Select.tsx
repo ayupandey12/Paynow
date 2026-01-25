@@ -4,7 +4,7 @@ import React from "react"
 
 export const Select=({onSelect,options}:{onSelect:(key:string,value:string)=>void,options:{key:string,value:string}[]})=>{
     const handlechange=(e:React.ChangeEvent<HTMLSelectElement>)=>{
-        console.log("check CI")
+        console.log("check CI is working ")
              const selectedvalue=e.target.value;
              const selectedoption=options.find(t=>t.key===selectedvalue)
              if(selectedoption)
