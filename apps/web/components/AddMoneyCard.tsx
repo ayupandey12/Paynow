@@ -4,7 +4,7 @@ import {Text} from "@repo/ui/Text"
 import { Button } from "@repo/ui/button"
 import {Select} from "@repo/ui/Select"
 import { useEffect, useState } from "react"
-import { CreateOnRampTransaction } from "../lib/actions/createonrampaction"
+import { CreateOnRampTransaction } from "../lib/actions/Createonrampaction"
 const SUPPORTED_BANKS = [{
     value: "HDFC Bank",
     key: "https://netbanking.hdfcbank.com"
