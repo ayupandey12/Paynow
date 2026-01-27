@@ -5,4 +5,4 @@ COPY apps ./apps
 COPY packages ./packages
 RUN npm ci
 RUN npm run build
-CMD ["npm run dev" ]
+CMD ["sh", "-c", "npm run dev"]
