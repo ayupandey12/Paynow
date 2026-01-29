@@ -39,18 +39,14 @@ jobs:
           sudo docker stop web-app || true
           sudo docker rm web-app || true
           
-          # Create a fresh .env file with ALL required variables
+          # Create a fresh .env file 
           cat <<EOF > /home/${{ secrets.SSH_USERNAME }}/.env
           DATABASE_URL=${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
           NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
           EOF
           
-          sudo docker run -d \
-            --name web-app \
-            -p 3005:3000 \
-            -v /home/${{ secrets.SSH_USERNAME }}/.env:/app/apps/web/.env \
-            ayushdevinfer/paynow:latest
+          sudo docker run -d --name web-app -p 3005:3000 -v /home/${{ secrets.SSH_USERNAME }}/.env:/app/apps/web/.env ayushdevinfer/paynow:latest
           
-          # Clean up old images to save disk space
+          # Clean up old images 
           sudo docker image prune -f
