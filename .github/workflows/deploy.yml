@@ -39,7 +39,7 @@ jobs:
           sudo docker stop web-app || true
           sudo docker rm web-app || true
           
-          # Create a fresh .env file 
+          # Create a new .env file  
           cat <<EOF > /home/${{ secrets.SSH_USERNAME }}/.env
           DATABASE_URL=${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
