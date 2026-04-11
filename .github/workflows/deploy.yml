@@ -28,3 +28,25 @@ jobs:
 
     - name: Verify Pushed Image
       run: docker pull ayushdevinfer/paynow:latest  
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          sudo docker pull ayushdevinfer/paynow:latest
+          sudo docker stop web-app || true
+          sudo docker rm web-app || true
+          
+          # Create a new .env file  
+          cat <<EOF > /home/${{ secrets.SSH_USERNAME }}/.env
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
+          EOF
+          
+          sudo docker run -d --name web-app -p 3005:3000 -v /home/${{ secrets.SSH_USERNAME }}/.env:/app/apps/web/.env ayushdevinfer/paynow:latest
+          
+          # Clean up old images 
+          sudo docker image prune -f
