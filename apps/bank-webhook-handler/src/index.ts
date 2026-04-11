@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { prisma } from "@repo/db";
 import axios from "axios";
 import express from "express"
@@ -13,8 +14,9 @@ app.get('/',async (req,res)=>{console.log("running")
 })
 // fake bank server to take userid,token,amount from app server and make a post req to bankwebhook server with same body
 app.post('/bankserver',async(req,res)=>{
-    console.log("hii")
+    console.log("hii",process.env["DATABASE_URL"]);
    const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
+    console.log(await prisma.user.findFirst({where:{id:userID}}));
    try {
     const rest=await axios.post("http://localhost:3010/bankwebhook",{userID,token,amount})
     return res.json({message:"done"})
@@ -24,9 +26,9 @@ app.post('/bankserver',async(req,res)=>{
 })
 app.post('/bankwebhook',async (req,res)=>{
     const {userID,token,amount}:{userID:string,token:string,amount:number}=req.body;
-    const amountmain=amount/100;
+    const amountmain=amount;
    try { 
-     await prisma.user.findMany({}); //used for transaction to work
+     await prisma.user.findFirst({where:{id:userID}}); //used for transaction to work
      await prisma.$transaction([
         prisma.balance.updateMany({
             where:{
