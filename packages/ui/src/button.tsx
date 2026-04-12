@@ -4,15 +4,22 @@ import { useFormStatus } from "react-dom";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick?:()=>void; //can be function or undefined
-  type?:any
+  onClick?: () => void;
+  type?: any;
 }
 
-export const Button = ({ children, onClick,type}: ButtonProps) => {
-  const {pending} =useFormStatus()
+export const Button = ({ children, onClick, type }: ButtonProps) => {
+  const { pending } = useFormStatus();
+
   return (
-      <button disabled={pending} onClick={onClick} type={type||"button"} className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
-      {pending?"processing...":children}
+    <button
+      disabled={pending}
+      onClick={onClick}
+      type={type || "button"}
+      className="inline-flex items-center justify-center rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-200/40 transition duration-200 hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      {pending ? "Processing..." : children}
     </button>
   );
 };
+
